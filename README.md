@@ -1,6 +1,9 @@
 # Veilid Server Build Docker Image
 This repository builds a docker image for compiling a Veilid Server from source. Once the image is built, numerous servers can be started in their own containers from the pre-compiled binary that is built into the image. I created this as a way to test multiple Veilid server nodes from one machine.
 
+## FOR DEVELOPMENT PURPOSES ONLY
+The image built here runs `veilid-server` as root. This is meant to serve as a quick and dirty way to spin up nodes. Do not, under any circumstances, use this to run production nodes.
+
 ## Setup
 - Install Docker (https://www.docker.com/)
 - Clone this repository: `git clone https://github.com/archwisp/VeilidServerBuildDockerImage`
