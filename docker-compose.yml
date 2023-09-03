@@ -5,6 +5,3 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: bash -c "/root/veilid/target/debug/veilid-server" 
-    volumes:
-      - /tmp/veilid-sever:/root/.local/share/veilid
