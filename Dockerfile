@@ -9,9 +9,9 @@ RUN chmod +x /root/rustup.sh
 RUN /root/rustup.sh -y;
 RUN git clone --recursive https://gitlab.com/veilid/veilid.git /root/veilid;
 RUN git -C /root/veilid checkout v0.4.4;
-# RUN /root/veilid/scripts/earthly/install_protoc.sh
 RUN source /root/.cargo/env && cd /root/veilid/veilid-server && cargo build --package veilid-server;
 RUN source /root/.cargo/env && cd /root/veilid/veilid-server && cargo build --package veilid-cli;
-RUN mkdir /etc/veilid;
-COPY veilid-server.yml /etc/veilid/veilid-server.yml
-CMD ["/root/veilid/target/debug/veilid-server", "--config-file=/etc/veilid/veilid-server.yml"]
+RUN mkdir /etc/veilid-server;
+RUN /root/veilid/target/debug/veilid-server --dump-config > /etc/veilid-server/veilid-server.conf;
+RUN sed -i 's/detect_address_changes:.*$/detect_address_changes: true/' /etc/veilid-server/veilid-server.conf;
+CMD ["/root/veilid/target/debug/veilid-server", "--config-file=/etc/veilid-server/veilid-server.conf"]

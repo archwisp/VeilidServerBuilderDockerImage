@@ -8,12 +8,15 @@ The image built by this respository runs `veilid-server` as root. It is meant to
 
 ## Build The Image
 - Install Docker (https://www.docker.com/)
-- Clone this repository: `git clone https://github.com/archwisp/VeilidServerDocker`
-- Change into the repository directory: `cd VeilidServerDocker`
-- Build the Docker image (takes 5-6 minutes on an M1 Mac): `docker build . -t archwisp/veilid-server:v0.4.4 --no-cache`
+
+### Clone the repository and build the image (takes 5-6 minutes on an M1 Mac):
+```
+git clone https://github.com/archwisp/VeilidServerDocker
+cd VeilidServerDocker
+docker build . -t archwisp/veilid-server:v0.4.4 --no-cache
+```
 
 Once the image is built, you should see it with the `docker images` command:
-
 ```
 $ docker images
 REPOSITORY                                     TAG       IMAGE ID       CREATED         SIZE
@@ -25,13 +28,13 @@ archwisp/veilid-server                      v0.4.4     6062b0659c12   25 minutes
 Running the containers using the `-v` or `--volume` parameter allows the server storage to be persisted on your Docker host. If you need to delete a container for some reason, you can spin the server back up using the same stored data.
 
 - Create a directory for persistent node 1 storage: 
-    - `mkdir /tmp/veilid-sever-1`
+    - `mkdir -p /tmp/veilid-server/sever-1`
 - Create a directory for persistent node 2 storage: 
-    - `mkdir /tmp/veilid-sever-2`
+    - `mkdir -p /tmp/veilid-server/sever-2`
 - Run `veilid-server-1` in a container: 
-    - `docker run -it -d --name veilid-server-1 -v /tmp/veilid-sever/server-1:/root/.local/share/veilid archwisp/veilid-server:v0.4.4`
+    - `docker run -it -d --name veilid-server-1 -v /tmp/veilid-sever/server-1:/var/db/veilid-server archwisp/veilid-server:v0.4.4`
 - Run `veilid-server-2` in a container: 
-    - `docker run -it -d --name veilid-server-2 -v /tmp/veilid-sever/server-2:/root/.local/share/veilid archwisp/veilid-server:v0.4.4`
+    - `docker run -it -d --name veilid-server-2 -v /tmp/veilid-sever/server-2:/var/db/veilid-server archwisp/veilid-server:v0.4.4`
 
 Once the containers have been lauched, you should see them running with the `docker ps` command:
 
