@@ -1,4 +1,4 @@
-FROM ubuntu:23.04
+FROM ubuntu:24.04
 SHELL ["/bin/bash", "-c"]
 RUN apt-get update;
 RUN apt-get install -y gpg sudo wget curl git vim net-tools pip;
@@ -8,8 +8,10 @@ RUN curl https://sh.rustup.rs -sSf > /root/rustup.sh;
 RUN chmod +x /root/rustup.sh
 RUN /root/rustup.sh -y;
 RUN git clone --recursive https://gitlab.com/veilid/veilid.git /root/veilid;
-RUN /root/veilid/scripts/earthly/install_protoc.sh
-RUN source /root/.cargo/env && cd /root/veilid/veilid-server && cargo build;
+RUN git -C /root/veilid checkout v0.4.4;
+# RUN /root/veilid/scripts/earthly/install_protoc.sh
+RUN source /root/.cargo/env && cd /root/veilid/veilid-server && cargo build --package veilid-server;
+RUN source /root/.cargo/env && cd /root/veilid/veilid-server && cargo build --package veilid-cli;
 RUN mkdir /etc/veilid;
 COPY veilid-server.yml /etc/veilid/veilid-server.yml
 CMD ["/root/veilid/target/debug/veilid-server", "--config-file=/etc/veilid/veilid-server.yml"]

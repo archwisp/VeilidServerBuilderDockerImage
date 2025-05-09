@@ -1,7 +1,0 @@
-version: '3'
-
-services:
-  veilid-server:
-    build:
-      context: .
-      dockerfile: Dockerfile
