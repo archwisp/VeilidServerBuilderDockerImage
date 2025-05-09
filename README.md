@@ -1,5 +1,5 @@
 # Veilid Server Docker 
-This project builds a Docker image based on Ubuntu 24.04 that compiles `veiled-server` from source. Building the image takes about 5-6 minutes on an M1 Mac.
+This project builds a Docker image based on Ubuntu 24.04 that compiles `veilid-server` from source. Building the image takes about 5-6 minutes on an M1 Mac.
 
 Once the image is built, numerous servers can be instantly started in their own containers. I created this as a way to easily test multiple Veilid Server nodes from one machine.
 
